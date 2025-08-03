@@ -231,3 +231,22 @@ submitBtn.addEventListener("click", (e) => {
     shippingError.classList.add("hidden"); // hide warning if valid
   }
 });
+
+const slipInput = document.getElementById("slip-upload");
+const slipPreview = document.getElementById("slip-preview");
+const slipImg = document.getElementById("slip-image");
+const removeSlipBtn = document.getElementById("remove-slip");
+
+slipInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    slipImg.src = URL.createObjectURL(file);
+    slipPreview.classList.remove("hidden");
+  }
+});
+
+removeSlipBtn.addEventListener("click", () => {
+  slipInput.value = "";
+  slipImg.src = "";
+  slipPreview.classList.add("hidden");
+});

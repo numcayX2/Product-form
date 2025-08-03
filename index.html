@@ -108,7 +108,7 @@
                 data-expanded="false">
                 <h2 class="text-xl font-semibold mb-6 text-gray-800">ข้อมูลผู้ซื้อ</h2>
 
-                <!-- First & Last Name -->
+                <!-- Name -->
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label for="f-name" class="block mb-1 text-gray-700">ชื่อ</label>
@@ -122,16 +122,16 @@
                     </div>
                 </div>
 
-                <!-- Email & Phone -->
+                <!-- Contact -->
                 <div class="grid md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label for="email" class="block mb-1 text-gray-700">อีเมล</label>
-                        <input type="email" name="email" id="email" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
-                    </div>
                     <div>
                         <label for="phone" class="block mb-1 text-gray-700">เบอร์โทร</label>
                         <input type="tel" name="phone" id="phone" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-1 text-gray-700">อีเมล</label>
+                        <input type="email" name="email" id="email"
                             class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
                     </div>
                 </div>
@@ -143,34 +143,63 @@
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400 resize-none"></textarea>
                 </div>
 
+                <!-- Quantity -->
                 <div class="mb-4">
                     <label for="quantity" class="block mb-1 text-gray-700">จำนวนสินค้า</label>
-                    <input type="number" name="quantity" step="1" value="1"
-                        class="px-4 py-2 border-gray-300 border rounded-md">
+                    <input type="number" name="quantity" id="quantity" step="1" value="1"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400">
                 </div>
 
-                <!-- Shipping Type -->
+                <!-- Purchase Date -->
+                <div class="mb-4">
+                    <label for="purchase-date" class="block mb-1 text-gray-700">วันที่ซื้อ</label>
+                    <input type="date" id="purchase-date" name="purchase-date" required
+                        class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400">
+                </div>
+
+                <!-- Shipping Option -->
                 <div class="mb-6">
-                    <p class="block mb-1 text-gray-700">ประเภทการจัดส่ง</p>
+                    <p class="block mb-1 text-gray-700">การรับสินค้า</p>
                     <div id="shipping-options" class="flex gap-3">
-                        <button type="button" data-value="standard"
-                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition">
-                            จัดส่งธรรมดา
-                        </button>
-                        <button type="button" data-value="express"
-                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition text-blue-400">
-                            จัดส่งด่วน
-                        </button>
+                        <button type="button" data-value="delivery"
+                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition">จัดส่ง</button>
+                        <button type="button" data-value="pickup"
+                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition">รับเอง</button>
                     </div>
-                    <p id="shipping-error" class="text-red-500 mt-2 hidden">กรุณาเลือกประเภทการจัดส่ง</p>
-                    <!-- hidden input for form submission -->
-                    <input type="hidden" name="shipping-type" id="shipping-type" />
+                    <p id="shipping-error" class="text-red-500 mt-2 hidden">กรุณาเลือกประเภทการรับสินค้า</p>
+                    <input type="hidden" name="shipping-type" id="shipping-type">
                 </div>
 
-                <!-- Payment Info -->
-                <p class="text-sm text-gray-500">* ชำระเงินผ่านทาง PromptPay เท่านั้น *</p>
+                <!-- Payment Method -->
+                <div class="mb-6">
+                    <label for="payment-method" class="block mb-1 text-gray-700">ช่องทางชำระเงิน</label>
+                    <select name="payment-method" id="payment-method"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400">
+                        <option value="promptpay">PromptPay</option>
+                        <option value="bank">โอนผ่านธนาคาร</option>
+                        <option value="cash">เงินสด</option>
+                    </select>
+                </div>
+
+                <!-- Slip Upload -->
+                <div class="mb-4">
+                    <label class="flex mb-1 text-gray-700">อัปโหลดสลิปชำระเงิน<p class="mx-4 text-red-300">** ไม่ต้องกรอกหากชำระด้วยเงินสด</p></label>
+                    <input type="file" id="slip-upload" accept="image/*"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-full file:border-gray-300 file:text-sm file:bg-white file:text-gray-700 hover:file:bg-gray-100" />
+                    <div id="slip-preview" class="mt-2 hidden relative w-fit">
+                        <img id="slip-image" src="" alt="Slip Preview"
+                            class="max-w-xs rounded-md border border-gray-300" />
+                        <button type="button" id="remove-slip"
+                            class="absolute top-0 right-0 bg-red-600 text-white text-xs px-2 py-1 rounded-full translate-x-1/2 -translate-y-1/2">ลบ</button>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <p class="text-sm text-gray-500">* กรุณาตรวจสอบข้อมูลก่อนชำระเงิน *</p>
                 <button id="submit" type="submit"
-                    class="rounded-full w-fit p-4 px-8 bg-black text-white cursor-pointer my-4 hover:scale-95 duration-200">ชำระเงิน</button>
+                    class="rounded-full w-fit p-4 px-8 bg-black text-white cursor-pointer my-4 hover:scale-95 duration-200">
+                    ชำระเงิน
+                </button>
             </div>
         </form>
     </div>
