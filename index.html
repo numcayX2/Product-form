@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User buying form</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="components/styles/user.css">
+</head>
+
+<body
+    class="w-screen overflow-x-hidden bg-[#f5f5f5] bg-[url('/components/img/heroimgflask.png')] bg-center bg-cover bg-fixed">
+    <nav id="navbar" class="bg-white px-2 md:px-8 fixed top-0 w-screen z-10000 shadow-md">
+        <div class="w-[90%] mx-auto flex justify-between items-center h-full">
+            <a href="#" class="h-14 w-18">
+                <div id="logopic" class="h-14 w-18 bg-[url(/components/img/csmju_minimal_logo.png)] bg-cover bg-center">
+                </div>
+            </a>
+            <div id="navbar-r-side" class="flex gap-4 justify-center items-center">
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center relative w-[300px]">
+                    <input type="text" placeholder="ค้นหาสินค้า..."
+                        class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-gray-400 rounded" />
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" width="18" height="18"
+                        fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </div>
+                <div id="roleBtnFrame" class="flex gap-3 md:gap-0">
+                    <a href="admin_product_form.html">
+                        <button id="roleBtn"
+                            class="px-4 py-1 rounded-[999px] text-white bg-[#333] hover:shadow-lg overflow-hidden relative w-24">
+                            <span class="front block w-full text-center">User</span>
+                            <span
+                                class="back block w-full text-center absolute top-0 left-0 opacity-0 translate-y-[15%] rotate-y-180">Admin</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="Herosection" class="w-full h-[75vh] flex justify-center items-center">
+        <div class="flex w-fit py-2 px-4 sm:px-12 md:px-24 gap-4 bg-white/10 backdrop-invert">
+            <p id="f-title" class="text-blue-500 font-medium text-6xl sm:text-7xl md:text-8xl">CSMJU</p>
+            <p id="l-title" class="text-sky-400 text-6xl sm:text-7xl md:text-8xl">flask</p>
+        </div>
+    </section>
+    <div id="main-container" class="w-9/11 relative z-1000 rounded-xl px-6 py-8 mx-auto">
+        <form action="#" class="container w-10/12 max-w-[1080px] mx-auto flex justify-center flex-col">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-chevron-double-up mx-auto mb-4" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z" />
+                <path fill-rule="evenodd"
+                    d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z" />
+            </svg>
+
+            <div class="w-9/12 mx-auto border-b-1 border-gray-500 py-8 mb-4 text-center">
+                <!-- Product Title -->
+                <h1 class="text-2xl md:text-3xl">กระติกน้ำเก็บความเย็น | CSMJU Flask</h1>
+            </div>
+            <!-- Product Images -->
+            <h1 class="text-lg md:text-xl text-center my-4 md:mb-12">ตัวอย่างรูปภาพสินค้า</h1>
+            <div class="grid gap-8 lg:gap-4 grid-cols-1 lg:grid-cols-2 justify-items-center">
+                <img src="/components/img/csmju_flask.png" alt="preview1"
+                    class="shadow-xl rounded-md w-[70%] max-w-[300px] lg:max-w-[500px]">
+                <img src="/components/img/csmju_flask_handle.png" alt="preview2"
+                    class="shadow-xl rounded-md w-[70%] max-w-[300px] lg:max-w-[500px]">
+            </div>
+            <p class="text-lg text-gray-700 mt-12">กระติกน้ำเก็บความเย็น ลาย CSMJU</p>
+            <p class="text-3xl text-orange-400 mt-4">ราคา <span id="product-price">329 - 589</span> บาท</p>
+            <!-- Size Options -->
+            <div class="mb-4">
+                <p class="my-8">ตัวเลือกสินค้า</p>
+                <div id="size-container" class="flex flex-wrap md:flex-row gap-3 my-4">
+                    <!-- Buttons will be generated by JS -->
+                </div>
+                <p id="error-msg" class="text-red-500 mt-2 hidden">กรุณาเลือกขนาด</p>
+            </div>
+
+            <!-- Product Description -->
+            <div class="mt-4 text-gray-800 leading-relaxed text-sm sm:text-base">
+                <h2 class="text-xl font-bold mb-2">รายละเอียดสินค้า</h2>
+                <p class="text-red-500">** สินค้ามีเพียงสีเดียวเท่านั้น</p>
+                <p class="mb-4">
+                    แก้วน้ำเก็บอุณหภูมิรุ่นพรีเมียมจาก CSMJU ผลิตจากวัสดุคุณภาพสูง มีดีไซน์ทันสมัย
+                    เหมาะสำหรับการใช้งานในชีวิตประจำวัน ทั้งในห้องเรียน ออฟฟิศ หรือระหว่างเดินทาง
+                    ช่วยรักษาอุณหภูมิของเครื่องดื่มได้ยาวนาน พร้อมตอบโจทย์ไลฟ์สไตล์ของคนยุคใหม่
+                </p>
+
+                <ul class="list-disc pl-6 mb-4 space-y-1">
+                    <li>เก็บความเย็นได้นานสูงสุด 12 ชั่วโมง และความร้อนได้ถึง 8 ชั่วโมง</li>
+                    <li>วัสดุสแตนเลสเกรด 304 ปลอดสาร BPA แข็งแรง ทนทาน ไม่เป็นสนิม</li>
+                    <li>ฝาปิดแน่น ป้องกันการรั่วซึม พกพาได้อย่างมั่นใจ</li>
+                    <li>ขนาดกระทัดรัด น้ำหนักเบา พกพาสะดวก</li>
+                    <li>สามารถใช้งานซ้ำได้ ช่วยลดการใช้พลาสติก</li>
+                </ul>
+            </div>
+            <button type="button" id="buy-btn"
+                class="rounded-full w-fit p-4 px-8 bg-black text-white cursor-pointer my-4 hover:scale-95 duration-200">กรอกข้อมูลเพิ่มเติม
+                เพื่อสั่งซื้อสินค้า</button>
+            <div id="info-form" class="w-10/12 mx-auto mt-10 mb-8 bg-white px-6" style="height: 0; overflow: hidden"
+                data-expanded="false">
+                <h2 class="text-xl font-semibold mb-6 text-gray-800">ข้อมูลผู้ซื้อ</h2>
+
+                <!-- First & Last Name -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="f-name" class="block mb-1 text-gray-700">ชื่อ</label>
+                        <input type="text" name="f-name" id="f-name" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
+                    </div>
+                    <div>
+                        <label for="l-name" class="block mb-1 text-gray-700">นามสกุล</label>
+                        <input type="text" name="l-name" id="l-name" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
+                    </div>
+                </div>
+
+                <!-- Email & Phone -->
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="email" class="block mb-1 text-gray-700">อีเมล</label>
+                        <input type="email" name="email" id="email" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
+                    </div>
+                    <div>
+                        <label for="phone" class="block mb-1 text-gray-700">เบอร์โทร</label>
+                        <input type="tel" name="phone" id="phone" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400" />
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4">
+                    <label for="address" class="block mb-1 text-gray-700">ที่อยู่สำหรับจัดส่ง</label>
+                    <textarea name="address" id="address" rows="4" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-400 resize-none"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="quantity" class="block mb-1 text-gray-700">จำนวนสินค้า</label>
+                    <input type="number" name="quantity" step="1" value="1"
+                        class="px-4 py-2 border-gray-300 border rounded-md">
+                </div>
+
+                <!-- Shipping Type -->
+                <div class="mb-6">
+                    <p class="block mb-1 text-gray-700">ประเภทการจัดส่ง</p>
+                    <div id="shipping-options" class="flex gap-3">
+                        <button type="button" data-value="standard"
+                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition">
+                            จัดส่งธรรมดา
+                        </button>
+                        <button type="button" data-value="express"
+                            class="shipping-btn px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition text-blue-400">
+                            จัดส่งด่วน
+                        </button>
+                    </div>
+                    <p id="shipping-error" class="text-red-500 mt-2 hidden">กรุณาเลือกประเภทการจัดส่ง</p>
+                    <!-- hidden input for form submission -->
+                    <input type="hidden" name="shipping-type" id="shipping-type" />
+                </div>
+
+                <!-- Payment Info -->
+                <p class="text-sm text-gray-500">* ชำระเงินผ่านทาง PromptPay เท่านั้น *</p>
+                <button id="submit" type="submit"
+                    class="rounded-full w-fit p-4 px-8 bg-black text-white cursor-pointer my-4 hover:scale-95 duration-200">ชำระเงิน</button>
+            </div>
+        </form>
+    </div>
+    <footer class="w-full bg-gray-900 text-gray-200 pt-12">
+        <div class="max-w-7xl mx-auto px-6 py-10 flex justify-between gap-10">
+
+            <!-- Brand Info -->
+            <div>
+                <h2 class="text-xl font-semibold mb-3">CSMJU Flask</h2>
+                <p class="text-sm text-gray-400">
+                    กระติกน้ำคุณภาพสำหรับนักศึกษาและบุคลากร CSMJU<br />
+                    ออกแบบเรียบง่าย ใช้งานได้ทุกวัน
+                </p>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-semibold mb-3">ติดต่อเรา</h3>
+                <p class="text-sm text-gray-400">คณะวิทยาการคอมพิวเตอร์ มหาวิทยาลัยแม่โจ้</p>
+                <p class="text-sm text-gray-400 mt-1">Email: example@csmju.ac.th</p>
+                <p class="text-sm text-gray-400">โทร: 012-345-6789</p>
+            </div>
+
+        </div>
+
+        <div class="text-center text-xs text-gray-500 py-4 border-t border-gray-800">
+            © 2025 CSMJU Flask. All rights reserved.
+        </div>
+    </footer>
+    <script src="/components/scripts/user.js"></script>
+</body>
+
+</html>
