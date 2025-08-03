@@ -127,6 +127,7 @@ sizes.forEach((size) => {
 buyBtn.addEventListener("click", () => {
   if (!selectedSize) {
     errorMsg.classList.remove("hidden");
+    document.getElementById('product-option')?.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
 
